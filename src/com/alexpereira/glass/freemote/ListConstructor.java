@@ -57,11 +57,10 @@ public class ListConstructor extends MenuActivity{
 	                    
 	            		mViewMode = ViewMode.MENU;
 	
-		              	if (mViewMode == ViewMode.MENU){
-		              		jsonURL = baseRemoteURL+"&key=home";
-		              		new LoadJSON().execute();
-	              	}
-            		break;
+	              		jsonURL = baseRemoteURL+"&key=home";
+	              		new LoadJSON().execute();
+
+	              		break;
                 	case 1:
                 		Card card2 = new Card(act_parent);
                         card2.setText("Browse now");

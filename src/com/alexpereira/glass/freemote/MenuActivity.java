@@ -93,8 +93,6 @@ public class MenuActivity extends Activity {
             public boolean onGesture(Gesture gesture) {
             	Log.d("Geste", "Gesture Detected");
                 if (gesture == Gesture.TAP) {
-                    // do something on tap
-	            	Log.d("GESTE","taaaap");
 	            	if (mViewMode == null) {
 	            		return false;
 	          	  	}
@@ -104,39 +102,57 @@ public class MenuActivity extends Activity {
 	              		
 	          		  	mViewMode = ViewMode.LIST;
 	              	}
+	              	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=ok";
+	              		new LoadJSON().execute();
+                	}
                     return true;
                 } else if (gesture == Gesture.TWO_TAP) {
                     // do something on two finger tap
                     return true;
-                } else if (gesture == Gesture.SWIPE_RIGHT) {
-                    // do something on right (forward) swipe
-                	Log.d("GESTE","riiiight");
-                	
-                	if (mViewMode == ViewMode.SWIPECHANNELS) {
+                } else if (gesture == Gesture.SWIPE_UP) {
+                	if (mViewMode == ViewMode.MENU){
                 		jsonURL = baseRemoteURL+"&key=up";
 	              		new LoadJSON().execute();
                 	}
                     return true;
-                } else if (gesture == Gesture.TWO_SWIPE_RIGHT){
-            		Log.d("GESTE","two riiiight");
+	            } else if (gesture == Gesture.SWIPE_DOWN) {
+	            	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=down";
+	              		new LoadJSON().execute();
+                	}
+	                return true;
+	            }else if (gesture == Gesture.SWIPE_RIGHT) {
+                    if (mViewMode == ViewMode.SWIPECHANNELS) {
+                		jsonURL = baseRemoteURL+"&key=up";
+	              		new LoadJSON().execute();
+                	}
                 	
-                	if (mViewMode == ViewMode.SWIPECHANNELS) {
+                	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=right";
+	              		new LoadJSON().execute();
+                	}
+                	
+                    return true;
+                } else if (gesture == Gesture.TWO_SWIPE_RIGHT){
+            		if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=up&long=true";
 	              		new LoadJSON().execute();
                 	}
                     return true;
-                } else if (gesture == Gesture.SWIPE_LEFT) {
-                    // do something on left (backwards) swipe
-                	Log.d("GESTE","leffft");
-                	
+                } else if (gesture == Gesture.SWIPE_LEFT) {                	
                 	if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=down";
 	              		new LoadJSON().execute();
 	              	}
-                    return true;
-                } else if (gesture == Gesture.TWO_SWIPE_LEFT){
-            		Log.d("GESTE","two leffft");
                 	
+                	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=left";
+	              		new LoadJSON().execute();
+                	}
+                	
+                    return true;
+                } else if (gesture == Gesture.TWO_SWIPE_LEFT){                	
                 	if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=down&long=true";
 	              		new LoadJSON().execute();
