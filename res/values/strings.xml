@@ -7,6 +7,18 @@
     
     <string name="home_card">Here is your Glass Freebox remote. Tap to browse the options :)</string>
     
-    <string name="freemote">Freebox</string>
-
+    <string name="freemote">Freebox Remote</string>
+    
+    <string name="home_ttl">HOME</string>
+    <string name="home_foot">Navigate in the freebox homescreen</string>
+    	<string name="home_inner_ttl">Navigate in your menu now</string>
+	    <string name="home_inner_foot">Swipe left or right with one finger and up and done with two fingers</string>
+	    
+	<string name="channels_ttl">BROWSE CHANNELS</string>
+	<string name="channels_foot">Use your glass to browser your channels</string>
+	    <string name="channels_inner_ttl">Browse now</string>
+	    <string name="channels_inner_foot">Swipe to browser up and done, click to select</string>
+	
+	<string name="onoff_ttl">ON/OFF</string>
+	<string name="onoff_foot">Turn On/Off your Freebox</string>
 </resources>
