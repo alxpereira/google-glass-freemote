@@ -36,7 +36,9 @@ public class MenuActivity extends Activity {
 	
 	protected static ViewMode mViewMode;
 	protected GestureDetector mGestureDetector;
-	protected String baseRemoteURL = "http://hd1.freebox.fr/pub/remote_control?code=84420033";
+	protected String freeboxCode = "84420033";
+	
+	protected String baseRemoteURL = "http://hd1.freebox.fr/pub/remote_control?code="+freeboxCode;
 	protected String jsonURL;
 	
     @Override
@@ -50,6 +52,8 @@ public class MenuActivity extends Activity {
         // @link : https://developers.google.com/glass/develop/gdk/ui/theme-widgets#creating_glass-styled_cards
         
         Card card1 = new Card(this);
+        card1.setImageLayout(Card.ImageLayout.FULL);
+        card1.addImage(R.drawable.freebox);
         card1.setText(R.string.home_card);
         
         View card1View = card1.toView();
@@ -102,27 +106,24 @@ public class MenuActivity extends Activity {
 	              		
 	          		  	mViewMode = ViewMode.LIST;
 	              	}
+	              	
+	              	if (mViewMode == ViewMode.SWIPECHANNELS) {
+                		jsonURL = baseRemoteURL+"&key=ok";
+	              		new LoadJSON().execute();
+	              	}
+	              	
 	              	if (mViewMode == ViewMode.MENU){
                 		jsonURL = baseRemoteURL+"&key=ok";
 	              		new LoadJSON().execute();
                 	}
                     return true;
                 } else if (gesture == Gesture.TWO_TAP) {
-                    // do something on two finger tap
-                    return true;
-                } else if (gesture == Gesture.SWIPE_UP) {
-                	if (mViewMode == ViewMode.MENU){
-                		jsonURL = baseRemoteURL+"&key=up";
+                	if (mViewMode == ViewMode.SWIPECHANNELS) {
+                		jsonURL = baseRemoteURL+"&key=back";
 	              		new LoadJSON().execute();
-                	}
+	              	}
                     return true;
-	            } else if (gesture == Gesture.SWIPE_DOWN) {
-	            	if (mViewMode == ViewMode.MENU){
-                		jsonURL = baseRemoteURL+"&key=down";
-	              		new LoadJSON().execute();
-                	}
-	                return true;
-	            }else if (gesture == Gesture.SWIPE_RIGHT) {
+                } else if (gesture == Gesture.SWIPE_RIGHT) {
                     if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=up";
 	              		new LoadJSON().execute();
@@ -137,6 +138,10 @@ public class MenuActivity extends Activity {
                 } else if (gesture == Gesture.TWO_SWIPE_RIGHT){
             		if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=up&long=true";
+	              		new LoadJSON().execute();
+                	}
+                	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=up";
 	              		new LoadJSON().execute();
                 	}
                     return true;
@@ -155,6 +160,11 @@ public class MenuActivity extends Activity {
                 } else if (gesture == Gesture.TWO_SWIPE_LEFT){                	
                 	if (mViewMode == ViewMode.SWIPECHANNELS) {
                 		jsonURL = baseRemoteURL+"&key=down&long=true";
+	              		new LoadJSON().execute();
+                	}
+                	
+                	if (mViewMode == ViewMode.MENU){
+                		jsonURL = baseRemoteURL+"&key=down";
 	              		new LoadJSON().execute();
                 	}
                     return true;

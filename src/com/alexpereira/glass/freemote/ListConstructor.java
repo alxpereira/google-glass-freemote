@@ -3,7 +3,6 @@ package com.alexpereira.glass.freemote;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,17 +23,24 @@ public class ListConstructor extends MenuActivity{
         Card card;
         
         card = new Card(parent);
-        card.setText("MENU");
+        card.setImageLayout(Card.ImageLayout.FULL);
+        card.addImage(R.drawable.home);
+        card.setText("HOME");
         card.setFootnote("Navigate in the freebox homescreen");
         mCards.add(card);
 
         card = new Card(parent);
+        card.setImageLayout(Card.ImageLayout.FULL);
+        card.addImage(R.drawable.channels);
         card.setText("BROWSE CHANNELS");
         card.setFootnote("Use your glass to browser your channels");
         mCards.add(card);
         
         card = new Card(parent);
-        card.setFootnote("Footer");
+        card.setImageLayout(Card.ImageLayout.FULL);
+        card.addImage(R.drawable.remote);
+        card.setText("ON/OFF");
+        card.setFootnote("Switch On/Off your Freebox");
         mCards.add(card);        
         
         mCardScrollView = new CardScrollView(parent);
@@ -45,12 +51,13 @@ public class ListConstructor extends MenuActivity{
 	
         mCardScrollView.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Log.d("LIST CLICK",String.valueOf(position));
-                
-                switch(position){
+               switch(position){
 	                case 0:
 	            		Card card1 = new Card(act_parent);
+	            		card1.setImageLayout(Card.ImageLayout.FULL);
+	                    card1.addImage(R.drawable.home);
 	                    card1.setText("Navigate in your menu now");
+	                    card1.setFootnote("Swipe left or right with one finger and up and done with two fingers");
 	                    
 	                    View card1View = card1.toView();
 	                    act_parent.setContentView(card1View);
@@ -63,7 +70,10 @@ public class ListConstructor extends MenuActivity{
 	              		break;
                 	case 1:
                 		Card card2 = new Card(act_parent);
+                		card2.setImageLayout(Card.ImageLayout.FULL);
+                        card2.addImage(R.drawable.channels);
                         card2.setText("Browse now");
+                        card2.setFootnote("Swipe to browser up and done, click to select");
                         
                         View card2View = card2.toView();
                         act_parent.setContentView(card2View);
@@ -74,6 +84,10 @@ public class ListConstructor extends MenuActivity{
     	              		jsonURL = baseRemoteURL+"&key=ok";
     	              		new LoadJSON().execute();
     	              	}
+                		break;
+                	case 2:
+                		jsonURL = baseRemoteURL+"&key=power";
+	              		new LoadJSON().execute();
                 		break;
                 	default:
                 		break;
